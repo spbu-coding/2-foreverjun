@@ -5,10 +5,10 @@
 #define FIRST_ARGUMENT_LENGTH 7
 #define SECOND_ARGUMENT_LENGTH 5
 
-void array_sorting(int size_array, long* array);
+void array_sorting(int size_array, long long* array);
 struct arguments{
-    long from;
-    long to;
+    long long from;
+    long long to;
     _Bool to_flag;
     _Bool from_flag;
 };
@@ -37,18 +37,19 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
 }
 int main(int argc, char* argv[]) {
     int result_analysis_argv, size_array = 0, count_changes = 0;
-    long  array[100], array_copy_for_counting[100];
+    long long array[100], array_copy_for_counting[100];
     struct arguments arg = {0, 0, 0, 0};
     result_analysis_argv = analysis_argv(&arg,argv,argc);
-    if (result_analysis_argv)
-    return result_analysis_argv;
+    if (result_analysis_argv){
+        printf("    %d",result_analysis_argv);
+    return result_analysis_argv;}
     do{
-        scanf("%ld", &array[size_array]);
+        scanf("%lld", &array[size_array]);
         if ((arg.to_flag && array[size_array] >= arg.to) || (arg.from_flag && array[size_array] <= arg.from)) {
             if (arg.from_flag && (array[size_array] <= arg.from))
-                fprintf(stdout, "%ld", array[size_array]);
+                fprintf(stdout, "%lld", array[size_array]);
             if (arg.to_flag && (array[size_array] >= arg.to))
-                fprintf(stderr, "%ld", array[size_array]);
+                fprintf(stderr, "%lld", array[size_array]);
         }
         else
             size_array++;
@@ -59,5 +60,6 @@ int main(int argc, char* argv[]) {
     for(int i = 0; i <size_array; i++)
         if (array[i] != array_copy_for_counting[i])
             count_changes++;
+    printf("    %d",count_changes);
     return count_changes;
 }
