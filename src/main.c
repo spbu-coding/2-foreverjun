@@ -42,8 +42,6 @@ int main(int argc, char* argv[]) {
     result_analysis_argv = analysis_argv(&arg,argv,argc);
     if (result_analysis_argv)
         return result_analysis_argv;
-
-    printf("%d, %d, %d, %d", arg.to, arg.to_flag, arg.from, arg.from_flag);
     do{
         scanf("%ld", &array[size_array]);
         if ((arg.to_flag && array[size_array] < arg.to) || (arg.from_flag && array[size_array] > arg.from)) {
