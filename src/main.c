@@ -41,10 +41,10 @@ int main(int argc, char* argv[]) {
     struct arguments arg = {0, 0, 0, 0};
     result_analysis_argv = analysis_argv(&arg,argv,argc);
     if (result_analysis_argv)
-        return result_analysis_argv;
+    return result_analysis_argv;
     do{
         scanf("%ld", &array[size_array]);
-        if ((arg.to_flag && array[size_array] < arg.to) || (arg.from_flag && array[size_array] > arg.from)) {
+        if ((arg.to_flag && array[size_array] >= arg.to) || (arg.from_flag && array[size_array] <= arg.from)) {
             if (arg.from_flag && (array[size_array] <= arg.from))
                 fprintf(stdout, "%ld", array[size_array]);
             if (arg.to_flag && (array[size_array] >= arg.to))
