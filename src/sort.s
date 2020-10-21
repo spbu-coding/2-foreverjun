@@ -1,5 +1,6 @@
 	.file	"sort.c"
 	.text
+	.p2align 4
 	.globl	_array_sorting
 	.def	_array_sorting;	.scl	2;	.type	32;	.endef
 _array_sorting:
@@ -8,84 +9,67 @@ LFB0:
 	pushl	%ebp
 	.cfi_def_cfa_offset 8
 	.cfi_offset 5, -8
-	movl	%esp, %ebp
-	.cfi_def_cfa_register 5
+	pushl	%edi
+	.cfi_def_cfa_offset 12
+	.cfi_offset 7, -12
+	pushl	%esi
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
 	pushl	%ebx
-	subl	$20, %esp
-	.cfi_offset 3, -12
-	movl	$0, -12(%ebp)
-	jmp	L2
-L6:
-	movl	8(%ebp), %eax
-	subl	$1, %eax
-	movl	%eax, -16(%ebp)
-	jmp	L3
+	.cfi_def_cfa_offset 20
+	.cfi_offset 3, -20
+	subl	$12, %esp
+	.cfi_def_cfa_offset 32
+	movl	32(%esp), %ebp
+	movl	36(%esp), %edx
+	testl	%ebp, %ebp
+	jle	L1
+	leal	-1(%ebp), %eax
+	movl	%eax, 4(%esp)
+	testl	%eax, %eax
+	jle	L1
+	xorl	%edi, %edi
+	.p2align 4,,10
+	.p2align 3
 L5:
-	movl	-16(%ebp), %eax
-	addl	$536870911, %eax
-	leal	0(,%eax,8), %edx
-	movl	12(%ebp), %eax
-	addl	%edx, %eax
-	movl	(%eax), %ecx
-	movl	4(%eax), %ebx
-	movl	-16(%ebp), %eax
-	leal	0(,%eax,8), %edx
-	movl	12(%ebp), %eax
-	addl	%edx, %eax
-	movl	4(%eax), %edx
-	movl	(%eax), %eax
-	cmpl	%ecx, %eax
-	movl	%edx, %eax
-	sbbl	%ebx, %eax
-	jge	L4
-	movl	-16(%ebp), %eax
-	addl	$536870911, %eax
-	leal	0(,%eax,8), %edx
-	movl	12(%ebp), %eax
-	addl	%edx, %eax
-	movl	4(%eax), %edx
-	movl	(%eax), %eax
-	movl	%eax, -20(%ebp)
-	movl	-16(%ebp), %eax
-	leal	0(,%eax,8), %edx
-	movl	12(%ebp), %eax
-	addl	%edx, %eax
-	movl	-16(%ebp), %edx
-	addl	$536870911, %edx
-	leal	0(,%edx,8), %ecx
-	movl	12(%ebp), %edx
-	addl	%edx, %ecx
-	movl	4(%eax), %edx
-	movl	(%eax), %eax
-	movl	%eax, (%ecx)
-	movl	%edx, 4(%ecx)
-	movl	-16(%ebp), %eax
-	leal	0(,%eax,8), %edx
-	movl	12(%ebp), %eax
-	leal	(%edx,%eax), %ecx
-	movl	-20(%ebp), %eax
-	cltd
-	movl	%eax, (%ecx)
-	movl	%edx, 4(%ecx)
+	movl	4(%esp), %eax
+	.p2align 4,,10
+	.p2align 3
 L4:
-	subl	$1, -16(%ebp)
-L3:
-	movl	-16(%ebp), %eax
-	cmpl	-12(%ebp), %eax
-	jg	L5
-	addl	$1, -12(%ebp)
-L2:
-	movl	-12(%ebp), %eax
-	cmpl	8(%ebp), %eax
-	jl	L6
-	nop
-	nop
-	addl	$20, %esp
+	movl	-8(%edx,%eax,8), %ecx
+	movl	(%edx,%eax,8), %esi
+	movl	4(%edx,%eax,8), %ebx
+	cmpl	%ecx, %esi
+	movl	%ebx, %ebp
+	sbbl	-4(%edx,%eax,8), %ebp
+	jge	L7
+	movl	%ecx, (%edx,%eax,8)
+	sarl	$31, %ecx
+	movl	%esi, -8(%edx,%eax,8)
+	movl	%ebx, -4(%edx,%eax,8)
+	movl	%ecx, 4(%edx,%eax,8)
+L7:
+	subl	$1, %eax
+	cmpl	%edi, %eax
+	jg	L4
+	addl	$1, %edi
+	cmpl	4(%esp), %edi
+	jl	L5
+L1:
+	addl	$12, %esp
+	.cfi_def_cfa_offset 20
 	popl	%ebx
 	.cfi_restore 3
+	.cfi_def_cfa_offset 16
+	popl	%esi
+	.cfi_restore 6
+	.cfi_def_cfa_offset 12
+	popl	%edi
+	.cfi_restore 7
+	.cfi_def_cfa_offset 8
 	popl	%ebp
 	.cfi_restore 5
-	.cfi_def_cfa 4, 4
+	.cfi_def_cfa_offset 4
 	ret
 	.cfi_endproc
 LFE0:
