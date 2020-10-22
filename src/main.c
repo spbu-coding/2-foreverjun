@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
                 o++;
             }
             if (arg.to_flag && (array[size_array] >= arg.to)) {
-                err[o] = array[size_array];
+                err[e] = array[size_array];
                 e++;
             }
         }
