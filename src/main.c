@@ -46,11 +46,11 @@ int main(int argc, char* argv[]) {
         scanf("%lld", &array[size_array]);
         if ((arg.to_flag && array[size_array] >= arg.to) || (arg.from_flag && array[size_array] <= arg.from)) {
             if (arg.from_flag && (array[size_array] <= arg.from)) {
-                out[size_array] = array[size_array];
+                out[o] = array[size_array];
                 o++;
             }
             if (arg.to_flag && (array[size_array] >= arg.to)) {
-                err[size_array] = array[size_array];
+                err[o] = array[size_array];
                 e++;
             }
         }
