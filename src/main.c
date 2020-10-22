@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
         fprintf(stdout, "%lld", out[i]);
     }
     for (int i = 0; i < e; ++i) {
-        fprintf(stderr, "%lld", out[i]);
+        fprintf(stderr, "%lld", err[i]);
     }
     return count_changes;
 }
