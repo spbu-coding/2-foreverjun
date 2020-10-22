@@ -1,76 +1,63 @@
 	.file	"sort.c"
 	.text
 	.p2align 4
-	.globl	_array_sorting
-	.def	_array_sorting;	.scl	2;	.type	32;	.endef
-_array_sorting:
-LFB0:
+	.globl	array_sorting
+	.type	array_sorting, @function
+array_sorting:
+.LFB0:
 	.cfi_startproc
-	pushl	%ebp
-	.cfi_def_cfa_offset 8
-	.cfi_offset 5, -8
-	pushl	%edi
-	.cfi_def_cfa_offset 12
-	.cfi_offset 7, -12
-	pushl	%esi
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	pushl	%ebx
-	.cfi_def_cfa_offset 20
-	.cfi_offset 3, -20
-	subl	$12, %esp
-	.cfi_def_cfa_offset 32
-	movl	32(%esp), %ebp
-	movl	36(%esp), %edx
-	testl	%ebp, %ebp
-	jle	L1
-	leal	-1(%ebp), %eax
-	movl	%eax, 4(%esp)
-	testl	%eax, %eax
-	jle	L1
+	endbr64
+	testl	%edi, %edi
+	jle	.L1
+	leal	-1(%rdi), %r8d
+	testl	%r8d, %r8d
+	jle	.L1
 	xorl	%edi, %edi
+	movslq	%r8d, %r9
 	.p2align 4,,10
 	.p2align 3
-L5:
-	movl	4(%esp), %eax
+.L5:
+	movq	%r9, %rax
 	.p2align 4,,10
 	.p2align 3
-L4:
-	movl	-8(%edx,%eax,8), %ecx
-	movl	(%edx,%eax,8), %esi
-	movl	4(%edx,%eax,8), %ebx
-	cmpl	%ecx, %esi
-	movl	%ebx, %ebp
-	sbbl	-4(%edx,%eax,8), %ebp
-	jge	L7
-	movl	%ecx, (%edx,%eax,8)
-	sarl	$31, %ecx
-	movl	%esi, -8(%edx,%eax,8)
-	movl	%ebx, -4(%edx,%eax,8)
-	movl	%ecx, 4(%edx,%eax,8)
-L7:
-	subl	$1, %eax
-	cmpl	%edi, %eax
-	jg	L4
+.L4:
+	movq	-8(%rsi,%rax,8), %rdx
+	movq	(%rsi,%rax,8), %rcx
+	cmpq	%rcx, %rdx
+	jle	.L7
+	movslq	%edx, %rdx
+	movq	%rcx, -8(%rsi,%rax,8)
+	movq	%rdx, (%rsi,%rax,8)
+.L7:
+	subq	$1, %rax
+	cmpl	%eax, %edi
+	jl	.L4
 	addl	$1, %edi
-	cmpl	4(%esp), %edi
-	jl	L5
-L1:
-	addl	$12, %esp
-	.cfi_def_cfa_offset 20
-	popl	%ebx
-	.cfi_restore 3
-	.cfi_def_cfa_offset 16
-	popl	%esi
-	.cfi_restore 6
-	.cfi_def_cfa_offset 12
-	popl	%edi
-	.cfi_restore 7
-	.cfi_def_cfa_offset 8
-	popl	%ebp
-	.cfi_restore 5
-	.cfi_def_cfa_offset 4
+	cmpl	%r8d, %edi
+	jl	.L5
+	ret
+	.p2align 4,,10
+	.p2align 3
+.L1:
 	ret
 	.cfi_endproc
-LFE0:
-	.ident	"GCC: (MinGW.org GCC Build-2) 9.2.0"
+.LFE0:
+	.size	array_sorting, .-array_sorting
+	.ident	"GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	 1f - 0f
+	.long	 4f - 1f
+	.long	 5
+0:
+	.string	 "GNU"
+1:
+	.align 8
+	.long	 0xc0000002
+	.long	 3f - 2f
+2:
+	.long	 0x3
+3:
+	.align 8
+4:
