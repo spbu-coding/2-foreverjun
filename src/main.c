@@ -46,9 +46,9 @@ int main(int argc, char* argv[]) {
         scanf("%lld", &array[size_array]);
         if ((arg.to_flag && array[size_array] >= arg.to) || (arg.from_flag && array[size_array] <= arg.from)) {
             if (arg.from_flag && (array[size_array] <= arg.from))
-                fprintf(stdout, "%lld", array[size_array]);
+                fprintf(stdout, "%lld ", array[size_array]);
             if (arg.to_flag && (array[size_array] >= arg.to))
-                fprintf(stderr, "%lld", array[size_array]);
+                fprintf(stderr, "%lld ", array[size_array]);
         }
         else
             size_array++;
