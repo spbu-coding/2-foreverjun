@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define FIRST_ARGUMENT_LENGTH 7
-#define SECOND_ARGUMENT_LENGTH 5
+#define FIRST_ARGUMENT_LENGTH 8
+#define SECOND_ARGUMENT_LENGTH 6
 
 void array_sorting(int size_array, long long* array);
 struct arguments{
@@ -19,11 +19,11 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
     if(argc > 3)
         return -2;
     for(int i = 1; i < argc; i++){
-        if(!strncmp(argv[i], "--from=", FIRST_ARGUMENT_LENGTH)){
+        if(!strncmp(argv[i], "--from=<", FIRST_ARGUMENT_LENGTH)){
             arg -> from = strtol(argv[i] + FIRST_ARGUMENT_LENGTH, &end, 10);
             arg -> from_flag = 1;
         }
-        if(!strncmp(argv[i], "--to=", SECOND_ARGUMENT_LENGTH)){
+        if(!strncmp(argv[i], "--to=<", SECOND_ARGUMENT_LENGTH)){
             arg -> to = strtol(argv[i] + SECOND_ARGUMENT_LENGTH, &end, 10);
             arg -> to_flag = 1;
         }
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
         return result_analysis_argv;}
     do{
         scanf("%lld", &array[size_array]);
-        if ((arg.to_flag && array[size_array] >= arg.to) || (arg.from_flag && array[size_array] <= arg.from)) {
+        if ((arg.to_flag && (array[size_array] >= arg.to)) || (arg.from_flag && (array[size_array] <= arg.from))) {
             if (arg.from_flag && (array[size_array] <= arg.from))
                 fprintf(stdout, "%lld", array[size_array]);
             if (arg.to_flag && (array[size_array] >= arg.to))
