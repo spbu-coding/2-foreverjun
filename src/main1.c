@@ -29,7 +29,7 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
         }
         end = NULL;
     }
-    if ((arg -> to_flag == 0 && arg -> from_flag == 0) || arg -> to_flag && arg -> from_flag && arg -> to < arg -> from)
+    if ((arg -> to_flag == 0 && arg -> from_flag == 0) || (arg -> to_flag && arg -> from_flag && arg -> to < arg -> from))
         return -4;
     if ((argc == 3 && !strncmp(argv[1], argv[2], SECOND_ARGUMENT_LENGTH)) ||
     (arg -> to == arg -> from && (arg -> to_flag == 1 && arg -> from ==1)))
