@@ -21,12 +21,15 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
     for(int i = 1; i < argc; i++){
         if(!strncmp(argv[i], "--from=<", FIRST_ARGUMENT_LENGTH)){
             arg -> from = strtol(argv[i] + FIRST_ARGUMENT_LENGTH, &end, 10);
-            arg -> from_flag = 1;
+            if (*end == ">")
+                arg -> from_flag = 1;
         }
         if(!strncmp(argv[i], "--to=<", SECOND_ARGUMENT_LENGTH)){
             arg -> to = strtol(argv[i] + SECOND_ARGUMENT_LENGTH, &end, 10);
-            arg -> to_flag = 1;
+            if (end == ">")
+                arg -> to_flag = 1;
         }
+        end = NULL;
     }
     if (arg -> to_flag == 0 && arg -> from_flag == 0)
         return -4;
