@@ -37,7 +37,6 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
     return 0;
 }
 int main(int argc, char* argv[]) {
-    char a;
     int result_analysis_argv, size_array = 0, count_changes = 0;
     long long array[100], array_copy_for_counting[100];
     struct arguments arg = {0, 0, 0, 0};
@@ -45,8 +44,7 @@ int main(int argc, char* argv[]) {
     if (result_analysis_argv){
         return result_analysis_argv;}
     do{
-        scanf("%lld%c", &array[size_array],&a);
-
+        scanf("%lld", &array[size_array]);
         if ((arg.to_flag && (array[size_array] >= arg.to)) || (arg.from_flag && (array[size_array] <= arg.from))) {
             if (arg.from_flag && (array[size_array] <= arg.from))
                 fprintf(stdout, "%lld", array[size_array]);
@@ -55,7 +53,7 @@ int main(int argc, char* argv[]) {
         }
         else
             size_array++;
-    }while (a == ' ');
+    }while (getchar() != -1);
     for(int i = 0; i <size_array; i++)
         array_copy_for_counting[i] = array[i];
     array_sorting(size_array, array);
