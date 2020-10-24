@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     result_analysis_argv = analysis_argv(&arg,argv,argc);
     if (result_analysis_argv){
         return result_analysis_argv;}
-    do{
+    while (getchar() != 10){
         scanf("%lld", &array[size_array]);
         if ((arg.to_flag && (array[size_array] >= arg.to)) || (arg.from_flag && (array[size_array] <= arg.from))) {
             if (arg.from_flag && (array[size_array] <= arg.from))
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
         }
         else
             size_array++;
-    }while (getchar() != 10);
+    }while (getchar() != 10)
     for(int i = 0; i <size_array; i++)
         array_copy_for_counting[i] = array[i];
     array_sorting(size_array, array);
