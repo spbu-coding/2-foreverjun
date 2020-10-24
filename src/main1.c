@@ -38,7 +38,7 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
 }
 int main(int argc, char* argv[]) {
     char character_after_number;
-    int result_analysis_argv, size_array = 0, count_changes = 0;
+    int result_analysis_argv, size_array = 1, count_changes = 0;
     long long array[100], array_copy_for_counting[100];
     struct arguments arg = {0, 0, 0, 0};
     result_analysis_argv = analysis_argv(&arg,argv,argc);
