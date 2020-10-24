@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define FIRST_ARGUMENT_LENGTH 8
-#define SECOND_ARGUMENT_LENGTH 6
+#define FIRST_ARGUMENT_LENGTH 7
+#define SECOND_ARGUMENT_LENGTH 5
 
 void array_sorting(int size_array, long long* array);
 struct arguments{
@@ -19,21 +19,20 @@ int analysis_argv(struct arguments* arg, char** argv, int argc){
     if(argc > 3)
         return -2;
     for(int i = 1; i < argc; i++){
-        if(!strncmp(argv[i], "--from=<", FIRST_ARGUMENT_LENGTH)){
+        if(strncmp(argv[i], "--from=", FIRST_ARGUMENT_LENGTH) == 0){
             arg -> from = strtol(argv[i] + FIRST_ARGUMENT_LENGTH, &end, 10);
-            if (*end == ">")
-                arg -> from_flag = 1;
+            arg -> from_flag = 1;
         }
-        if(!strncmp(argv[i], "--to=<", SECOND_ARGUMENT_LENGTH)){
+        if(strncmp(argv[i], "--to=", SECOND_ARGUMENT_LENGTH) == 0){
             arg -> to = strtol(argv[i] + SECOND_ARGUMENT_LENGTH, &end, 10);
-            if (end == ">")
-                arg -> to_flag = 1;
+            arg -> to_flag = 1;
         }
         end = NULL;
     }
     if (arg -> to_flag == 0 && arg -> from_flag == 0)
         return -4;
-    if ((argc == 3 && !strncmp(argv[1], argv[2], SECOND_ARGUMENT_LENGTH)) || arg -> to == arg -> from)
+    if ((argc == 3 && !strncmp(argv[1], argv[2], SECOND_ARGUMENT_LENGTH)) ||
+    (arg -> to == arg -> from && (arg -> to_flag == 1 && arg -> from ==1)))
         return -3;
     return 0;
 }
