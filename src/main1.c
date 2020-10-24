@@ -45,8 +45,8 @@ int main(int argc, char* argv[]) {
     if (result_analysis_argv){
         return result_analysis_argv;}
     do{
-        if (scanf("%lld%c", &array[size_array],&a) != 2)
-            return -1;
+        scanf("%lld%c", &array[size_array],&a);
+
         if ((arg.to_flag && (array[size_array] >= arg.to)) || (arg.from_flag && (array[size_array] <= arg.from))) {
             if (arg.from_flag && (array[size_array] <= arg.from))
                 fprintf(stdout, "%lld", array[size_array]);
