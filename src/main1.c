@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
         }
         else
             size_array++;
-    }while (getchar() != 10)
+    }
     for(int i = 0; i <size_array; i++)
         array_copy_for_counting[i] = array[i];
     array_sorting(size_array, array);
